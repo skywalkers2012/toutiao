@@ -8,18 +8,18 @@
 ---
 vue + webpack + vuex + axios
 
+##demo访问方式
+---
 ### npm run dev 本地开发
 ### npm run build 打包
 
-##demo访问方式
----
 **[在线预览地址, 或可通过 chrome 控制台手机模式观看](https://skywalkers2012.github.io/toutiao/dist/index.html)**
 
-**通过手机扫描二维码访问
-![访问二维码](https://skywalkers2012.github.io/toutiao/xiaoguo/address.png) 
+通过手机扫描二维码访问
+![image](https://skywalkers2012.github.io/toutiao/xiaoguo/address.png) 
 
-**APP登录的账号密码如下
----
+###APP登录的账号密码如下
+
 账号: 12345678911
 密码： skywalker
 
