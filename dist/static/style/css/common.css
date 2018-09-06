@@ -1,0 +1,20 @@
+html{
+	font-size: 625%;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+	background: #EEF3FA;
+
+}
+* {
+	box-sizing: border-box;
+	/* line-height: 1; */
+}
+[class^="icon-"], [class*=" icon-"] {
+	font-family:"iconfont" !important;
+	font-size: 0.16rem;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
