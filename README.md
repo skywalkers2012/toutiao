@@ -16,7 +16,7 @@ vue + webpack + vuex + axios
 **[在线预览地址, 或可通过 chrome 控制台手机模式观看](https://skywalkers2012.github.io/toutiao/dist/index.html)**
 
 ### 通过手机扫描二维码访问
-![image](https://github.com/skywalkers2012/toutiao/blob/master/xiaoguo/address.png) 
+![image](https://github.com/skywalkers2012/toutiao/master/address.png) 
 
 ### APP登录的账号密码如下
 
