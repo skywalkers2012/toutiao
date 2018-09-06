@@ -1,0 +1,59 @@
+/* flex布局 */
+.df-sb {
+    display:flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.df-sa {
+    display:flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.df-fs{
+    display: -webkit-flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+
+/* 垂直居中 */
+.df-c {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: center;
+}
+.tb-c {
+    text-align:center;
+    display:table-cell;
+    vertical-align:middle;
+}
+.ts-c {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+}
+.ts-mc {
+    position: absolute;
+    left: 0;right: 0;
+    bottom: 0; top: 0;
+    margin: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+.cf { zoom: 1; }
+
+.li-overflow {
+    list-style: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+
