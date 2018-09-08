@@ -95,7 +95,7 @@ export default{
 .wrap{
 	.toolBar{
 		font-size: 0.13rem;
-		height: 0.7rem;
+		height: 0.6rem;
 	}
 	.bottom {
 		[name='forword'] {

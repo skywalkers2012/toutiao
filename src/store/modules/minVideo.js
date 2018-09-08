@@ -1,6 +1,7 @@
 const minVideo={
 	state:{
-		selectTabIndex:1
+		selectTabIndex:1,
+		refresh:false,
 	},
 	namespaced:true
 }

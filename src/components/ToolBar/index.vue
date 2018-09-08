@@ -18,7 +18,6 @@
 .toolBarWrap{
 	height: 0.5rem;
 	font-size: 0.16rem;
-
 	.left {
 		padding-left: 0.2rem;
 	}

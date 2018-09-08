@@ -1,7 +1,7 @@
 <template>
 	<div class="headWrap">
 		<div class="searchWrap df-sa" ref='head'>
-			<mu-icon value=':icon-back' class='icon-back' @click='back'></mu-icon>	
+			<mu-icon value=':icon-back' class='icon-back' size="24" @click='back'></mu-icon>	
 			<mu-icon value=':icon-search' class='icon-search' ></mu-icon>
 			<input type="text" placeholder="搜你想搜的" ref='search' @keyup='searchHit'  @keydown.enter.stop='search(keyword)' v-model='keyword'>
 			<span class='searchText' @click.stop='search(keyword)'>搜索</span>	
@@ -36,7 +36,7 @@ export default {
 		}
 	},
 	watch:{
-		keywordtext:function(newVal){
+		keywordtext(newVal){
 			this.keyword=newVal;
 		}
 	},
@@ -92,7 +92,7 @@ export default {
 		> input {
 			border: none;
 			border-radius: 4px;
-			line-height: 0.3rem;
+			line-height: 0.36rem;
 			width: calc(100% - 1rem);
 			position: absolute;
 			left: 0.4rem;

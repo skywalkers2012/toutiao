@@ -4,7 +4,7 @@
 			<video-player class="vjs-custom-skin" 
 			ref="minVideo"
 			:options="playerOptions"
-			:playsinline="true" @ready="playerReadied">
+			:playsinline="true" >
 		</video-player>
 		<div class="detail">
 			<div class="title">{{videoData.title}}</div>
@@ -14,14 +14,12 @@
 				<span class="zanCount">{{videoData.pinglun}}万赞</span>
 			</div>
 		</div>
-		<div @click="delVideo" class="closeIcon" v-if="!showClose">
-			<mu-icon value=":icon-close" ></mu-icon>
+		<div class="clickProcess" @click="clickProcess($event)" v-show="!showClose" id="markCss">
+			<mu-icon value=":icon-close" class="closeIcon" v-show="!showClose" id="delItem" ref="all"></mu-icon>
 		</div>
-		<div class="clickProcess" @click="clickProcess" v-if="!showClose"></div>
 	</div>
 	<div v-show="false" id="closeBtn">
 	</div>
-
 </div>
 </template>
 
@@ -41,7 +39,7 @@ export default {
 				playbackRates: [0.5, 1.0, 1.5, 2.0],
 				autoplay:false,
 				language: 'en',
-				preload: 'auto',
+				preload: 'meta',
 				notSupportedMessage: '此视频暂无法播放，请稍后再试',
 				sources: [{
 					type: this.videoData.videoType,
@@ -69,19 +67,18 @@ export default {
 				this.$refs.minVideo.$el.querySelector('.closeVideo').style="display:none";
 			}
 		},
-		delVideo(){
-			this.$emit('delVideo');
-		},
-		clickProcess(){
-			if(!this.player.isFullscreen()){  
-				this.player.play(); 
-				this.player.requestFullscreen(); 	
-				this.player.isFullscreen(true);	
-				this.$refs.minVideo.$el.querySelector('.closeVideo').style="display:block!important";
+		clickProcess(event){
+			console.log(event)
+			if(event.target.id==="markCss"){
+				if(!this.player.isFullscreen()){  
+					this.player.play(); 
+					this.player.requestFullscreen(); 	
+					this.player.isFullscreen(true);	
+					this.$refs.minVideo.$el.querySelector('.closeVideo').style="display:block!important";
+				}
+			}else if(event.target.id==="delItem"){
+				this.$emit('delVideo');
 			}
-		},
-		playerReadied(player) {
-			player.currentTime(1)
 		}
 	},
 	mounted(){
@@ -94,6 +91,10 @@ export default {
 		})
 		var closeBtn=new component().$mount("#closeBtn");
 		this.$refs.minVideo.$el.querySelector('.video-js').appendChild(closeBtn.$el);
+		this.$refs.minVideo.$el.querySelector('video').setAttribute('x5-video-orientation', 'portraint');
+		this.$refs.minVideo.$el.querySelector('video').setAttribute('x5-video-player-fullscreen', true);
+		this.$refs.minVideo.$el.querySelector('video').style="object-fit: fill";
+		
 	}
 }
 </script>
@@ -124,12 +125,7 @@ export default {
 				}
 			}
 		}
-		.closeIcon {
-			position: absolute;
-			top: 0.1rem;
-			right: 0.1rem;
-			z-index: 100;
-		}
+
 	}
 	.clickProcess {
 		position: absolute;
@@ -138,6 +134,12 @@ export default {
 		width: 100%;
 		height: 100%;
 		border: 1px solid #ccc;
+	}
+	.closeIcon {
+		position: absolute;
+		top: 0.1rem;
+		right: 0.1rem;
+		color: white;
 	}
 }
 </style>

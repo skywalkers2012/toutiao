@@ -11,29 +11,39 @@
 			<div class="title">{{videoData.title}}</div>
 			<div class="playCount">{{videoData.playCount}}次播放</div>
 			<div class="videoTime">{{videoData.time}}</div>
-			<mu-avatar size="48" class='avatar' @click="$router.push('/unfinished')">
+			<mu-avatar size="40" class='avatar' @click="$router.push('/unfinished')" v-show="showAvatar">
 				<img :src="videoData.avatar">
 			</mu-avatar>
 		</div>
 	</div>
 	<div class="df-sa info">
-		<div class="avatar" @click="$router.push('/unfinished')">
+		<div class="avatar" @click="$router.push('/unfinished')" v-show="showAvatar">
 			<div class="authorName">
 				{{videoData.authorName}}
 			</div>
 		</div>
+		<div v-show="!showAvatar" class="df-sa">
+			<span>分享到</span>
+			<mu-avatar size="20" class="playAvatar">
+				<img src="~@/../static/img/weixin.png">
+			</mu-avatar>
+			<mu-avatar size="20" class="playAvatar">
+				<img src="~@/../static/img/weibo.png">
+			</mu-avatar>
+		</div>
 		<div class="guanzhu" @click='isGuanzhu=!isGuanzhu'>
-			<mu-icon left value=":icon-guanzhu" size='20' v-show="!isGuanzhu"></mu-icon>
+			<mu-icon value=":icon-guanzhu" class="barIcon" v-show="!isGuanzhu"></mu-icon>
 			<span>{{isGuanzhu?"已关注":"关注"}}</span>
 		</div>
 		<div class="pinglun">
-			<mu-icon left value=":icon-pinglun" size='20'></mu-icon>
+			<mu-icon value=":icon-pinglun" class="barIcon"></mu-icon>
 			<span>{{videoData.pinglun}}</span>
 		</div>
-		<div class="zhuanfa" @click="$set($store.state.video,'showZhuanfa',true)">
-			<mu-icon left value=":icon-more" size='20'></mu-icon>
+		<div class="zhuanfa" @click="showSheet=!showSheet">
+			<mu-icon value=":icon-more" class="barIcon"></mu-icon>
 		</div>
 	</div>
+	<bottomSheet :open="showSheet" :bindData='items'></bottomSheet>
 </section>
 </template>
 
@@ -41,23 +51,37 @@
 
 import { videoPlayer } from 'vue-video-player'
 import '@/../static/style/css/video.css'
+import bottomSheet from '@/components/bottomSheet/index.vue'
 
 export default {
 	components:{
-		videoPlayer
+		videoPlayer,
+		bottomSheet
 	},
 	data() {
 		return {
 			pause:true,
 			play:false,
 			isGuanzhu:false,
+			showAvatar:true,
+			showSheet:false,
+			items:[
+			{id:0,img:"~@/../static/img/toutiao.png",name:"转发"},
+			{id:1,img:"~@/../static/img/pengyouquan.png",name:"朋友圈"},
+			{id:2,img:"~@/../static/img/weixinhaoyou.png",name:"微信好友"},
+			{id:3,img:"~@/../static/img/qqkongjian.png",name:"qq空间"},
+			{id:4,img:"~@/../static/img/jiarushoucang.png",name:"加入收藏"},
+			{id:5,img:"~@/../static/img/buganxingqu.png",name:"不感兴趣"},
+			{id:6,img:"~@/../static/img/ding.png",name:"顶"},
+			{id:7,img:"~@/../static/img/cai.png",name:"踩"}
+			],
 			playerOptions:{
 				muted: false,
 				playbackRates: [0.5, 1.0, 1.5, 2.0],
 				aspectRatio: '16:9',
 				fluid: true,
 				autoplay:false,
-				preload: 'auto',
+				preload: 'meta',
 				language: 'en',
 				notSupportedMessage: '此视频暂无法播放，请稍后再试',
 				sources: [{
@@ -90,6 +114,7 @@ export default {
 				this.player.pause();
 				this.play=false;
 			}else{
+				this.showAvatar=false;
 				this.player.play();
 				this.pause=false;
 				this.play=true;
@@ -97,13 +122,13 @@ export default {
 		}
 	},
 	watch:{
-		pause:function(newVal,oldVal){
+		pause(newVal,oldVal){
 			if(this.pause){
 				this.player.pause();
 				this.pause=false;
 			}
 		},
-		playToken:function(newVal,oldVal){
+		playToken(newVal,oldVal){
 			if(newVal!=this.videoData.id){
 				this.player.pause();
 				this.play=false;
@@ -126,7 +151,7 @@ export default {
 			height: 100%;
 			width: 100%;
 			.title {
-				font-size: 16px;
+				font-size: 18px;
 				color: #EDEEEF;
 				padding: 10px 15px 0 15px;
 			}
@@ -150,17 +175,23 @@ export default {
 			.avatar{
 				position: absolute;
 				bottom: -10px;
-				left: 20px;
+				left: 24px;
 			}
 		}
 
 	}
 	.info {
-		height: 50px;
-		color: black;
+		height: 0.4rem;
+		line-height: 0.4rem;
 		font-size: 14px;
-		position: relative;
-		color: #4A4A4A;
+		.playAvatar {
+			background-color: transparent;
+			margin: 0 0.05rem;
+		}
+	}
+	.barIcon {
+		width: 0.2rem;
+		height: 0.2rem;
 	}
 
 }

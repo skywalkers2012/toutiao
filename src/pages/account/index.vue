@@ -36,14 +36,15 @@ export default{
 
 <style lang='less' scoped>
 .account-wrap{
+	overflow: hidden;
 	.content {
 		overflow: auto;
-		height: calc(100% - 0.5rem);
+		height: calc(100% - 0.4rem);
 		.account-head{
 			height: 1.6rem;
 		}
 		.account-body{
-			height: calc(100% - 2.1rem);
+			height: calc(100% - 1.6rem);
 			background-color: white;
 		}
 	}

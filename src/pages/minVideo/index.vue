@@ -1,5 +1,5 @@
 <template>
-	<article class="minVideo-wrap" >
+	<article class="minVideo-wrap" ref="all">
 		<section class='header-wrap df-sb'>
 			<div class="left df-sa">
 				<div v-for="bar in barList" @click="selectItem=bar.id" :key="bar.id" :class="{tabActive:selectItem===bar.id}">{{bar.name}}</div>
@@ -9,21 +9,21 @@
 				<span>发布</span>
 			</div>
 		</section>
-			<div class="itemContent" v-if="selectItem===bar.id" v-for="bar in barList" :key="bar.id" v-show="showAll">
-				<mu-load-more :loading="loadMore" @load="loadMoreData" @refresh="refreshData" :refreshing="refreshing" loading-text="推荐中" :loaded-all="false">
-					<div v-if='refreshing' class="df-c updateHit">推荐中</div>
-					<div class="tabItem">
-						<minVideo v-for='(item,index) in itemList' :key='item.id' :videoData="item" class='videoItem' :ref="item.id" @delVideo='itemList.splice(index,1)'></minVideo>
-					</div>
-				</mu-load-more>
-			</div>
+		<div class="itemContent" v-if="selectItem===bar.id" v-for="bar in barList" :key="bar.id" >
+			<mu-load-more :loading="loadMore" @load="loadMoreData" @refresh="refreshData" :refreshing="refreshing" loading-text="推荐中">
+				<div v-if='refreshing' class="df-c updateHit">推荐中</div>
+				<div class="tabItem">
+					<minVideo v-for='(item,index) in itemList' :key='item.id' :videoData="item" class='videoItem' @delVideo='itemList.splice(index,1)'></minVideo>
+				</div>
+			</mu-load-more>
+		</div>
 		<footerBar></footerBar>
 	</article>
 </template>
 
 <script>
 import footerBar from '@/pages/layout/footerBar'
-import minVideo from '@/components/video/index'
+import minVideo from './video/index'
 
 export default{
 	components:{
@@ -41,19 +41,23 @@ export default{
 			loadResult:false,
 			loadMore:false,
 			refreshing:false,
-			showAll:true
 		}
 	},
 	computed:{
 		itemList(){
 			return this.$store.state.video.videoResult;
+		},
+		refresh(){
+			return this.$store.state.minVideo.refresh;
 		}
 	},
-	beforeRouteLeave(to, from, next) {
-		this.showAll=false;
-		setTimeout(function(){
-			next();
-		}, 100)
+	watch:{
+		refresh(newData,oldData){
+			if(newData){
+				this.refreshData();
+				this.$store.state.minVideo.refresh=false;
+			}
+		},
 	},
 	mounted(){
 		this.loadData(this.selectItem);

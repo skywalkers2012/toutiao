@@ -16,7 +16,7 @@
 						<span>刚才看到这里 点击刷新</span>			
 						<mu-icon value=":icon-fresh"></mu-icon>
 					</div>
-					<newsTitle :data='item'  class='newsTitle'></newsTitle>
+					<NewsInfo :data='item' class='newsTitle' @click.native="$router.push({name:'NewsDetail',params:{newsId:item.id,title:item.title}})"></NewsInfo>
 				</div>			
 			</mu-load-more>
 		</div>
@@ -29,12 +29,10 @@
 <script>
 
 import {mapGetters} from 'vuex'
-import newsTitle from '@/components/news/newsTitle/index'
 import channel from './channel/index'
 
 export default {
 	components:{
-		newsTitle,
 		channel
 	},
 	data(){
@@ -56,10 +54,13 @@ export default {
 		selectChange(){
 			return this.$store.state.home.selectTabIndex;
 		},
+		refresh(){
+			return this.$store.state.home.refresh;
+		},
 		...mapGetters(['myTabList'])
 	},
 	watch:{
-		itemList : function(newData,oldData){
+		itemList(newData,oldData){
 			if(!this.watchDataChange) return;
 			this.lastReadNewNum=newData.length-oldData.length;
 			if(this.lastReadNewNum>0){
@@ -70,7 +71,13 @@ export default {
 				},800)
 			}
 		},
-		selectChange:function(){
+		refresh(newData,oldData){
+			if(newData){
+				this.loadData(this.$store.state.home.selectTabIndex);
+				this.$store.state.home.refresh=false;
+			}
+		},
+		selectChange(){
 			if(this.$store.state.home.tabSlide){
 				var domItem=this.$refs["tabItem"+this.$store.state.home.selectTabIndex][0].$el;
 				var domBar=this.$refs.tabList.$el;
@@ -93,6 +100,7 @@ export default {
 		loadData(typeId){
 			this.loading=true;
 			this.loadResult=false;
+			this.$store.state.user.refreshSearcHit=true;
 			this.$store.dispatch('home/getNews',{typeId:typeId});
 			setTimeout(() => {
 				this.loading=false;

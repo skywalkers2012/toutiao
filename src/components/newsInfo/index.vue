@@ -10,7 +10,7 @@
 			<img :src="data.imgList[0]" v-if='data.imgList.length===1' >
 		</div>
 		<div class="item_info">
-			<mu-icon value=':icon-hot' v-show='data.ishot' size='15' color='red'></mu-icon>
+			<mu-icon value=':icon-hot' v-show='data.ishot' size='18' color='red'></mu-icon>
 			<span class='src'>{{data.src}}</span>
 			<span class='cms'>评论:{{data.cmt}}</span>
 			<span class='time'>{{data.time}}</span>
@@ -28,11 +28,12 @@ export default {
 .newsTitle{
 	h3 {
 		color: #222;
-		font-size: 17px;
-		line-height: 21px;
+		font-size: 18px;
+		line-height: 24px;
 		font-weight: normal;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		padding-bottom: 0.05rem;
 	}
 	.listImg{
 		display: flex;
@@ -44,7 +45,10 @@ export default {
 	.item_info{
 		display: flex;
 		justify-content: flex-start;
-		font-size: 0.1rem;
+		font-size: 0.14rem;
+		padding-top: 0.05rem;
+		line-height: 20px;
+		height: 20px;
 		color: #999;
 		span {
 			padding: 0 0.05rem;

@@ -15,7 +15,7 @@
 }
 .app-container {
 	width: 100%;
-	height: calc(100% - 1rem);
+	height: calc(100% - 0.9rem);
 	position: relative;
 }
 
@@ -30,6 +30,9 @@ export default {
 	components:{
 		headerBar,
 		footerBar
+	},
+	beforeCreate(){
+		this.$store.dispatch('search/adviceSearch')
 	}
 }
 </script>

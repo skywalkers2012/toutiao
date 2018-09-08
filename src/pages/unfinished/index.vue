@@ -1,5 +1,5 @@
 <template>
 	<article class='unfinishedWrap'>
-		<HeaderBar title='未完成的页面'></HeaderBar>
+		<HeaderBar> 未完成的页面</HeaderBar>
 	</article>
 </template>

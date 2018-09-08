@@ -1,10 +1,11 @@
 <template>
 	<article class="fenglei-wrap">
-		<headerBar title="分类查找">
+		<HeaderBar>
+			分类查找
 			<div slot="right" class="right">
 				<mu-icon value=":icon-search" size="30"></mu-icon>
 			</div>
-		</headerBar>
+		</HeaderBar>
 		<div class="content-wrap">
 			<div class="left-wrap">
 				<div :class="{typeItem:true,'typeItem-active':$store.state.findPerson.selectType===type.id}" v-for="type in typeList" @click="clickItem(type)">{{type.name}}</div>
@@ -16,13 +17,13 @@
 					</mu-tabs>
 					<div v-if="tab.tabId === $store.state.findPerson.selectTabId" v-for="tab in type.children" class="item-wrap">
 						<mu-load-more  :loading="loadMore" @load="loadMoreData" loading-text="正在加载">
-							<personBar v-for="person in personDataList" :personData="person" :key="person.id"></personBar>	
+							<PersonBar v-for="person in personDataList" :personData="person" :key="person.id"></PersonBar>	
 						</mu-load-more>	
 					</div>
 				</div>
 				<div v-if="$store.state.findPerson.selectType===0" class="tuijian-wrap">
 					<mu-load-more  :loading="loadMore" @load="loadMoreData" loading-text="正在加载">
-						<personBar v-for="person in personDataList" :personData="person" :key="person.id"></personBar>
+						<PersonBar v-for="person in personDataList" :personData="person" :key="person.id"></PersonBar>
 					</mu-load-more>
 				</div>
 			</div>		
@@ -31,8 +32,6 @@
 </template>
 
 <script>
-import headerBar from '@/components/HeaderBar/index'
-import personBar from '@/components/personBar/index'
 import {Local} from '@/../static/utils/storage'
 
 export default {
@@ -40,10 +39,6 @@ export default {
 		return {
 			loadMore:false
 		}
-	},
-	components:{
-		headerBar,
-		personBar
 	},
 	computed:{
 		typeList(){
@@ -105,11 +100,11 @@ export default {
 				height: 0.6rem;
 				line-height: 0.7rem;
 				text-align: center;
-				font-size: 14px;
+				font-size: 16px;
 				border-right: 1px solid #edecec;
 			}
 			.typeItem-active {
-				font-size: 18px;
+				font-size: 20px;
 				color: red;
 			}
 		}

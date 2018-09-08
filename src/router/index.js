@@ -10,6 +10,7 @@ import Account from '@/pages/account/index'
 import Search from '@/pages/search/index'
 import System from '@/pages/system/index'
 import Unfinished from '@/pages/unfinished/index'
+import NewsDetail from '@/pages/home/newsDetail/index'
 
 
 Vue.use(Router)
@@ -18,15 +19,14 @@ Router.prototype.animate = 0
 const routes = [
 {	
 	path: '/',
-	name: '布局',
 	component: Layout,
 	redirect: '/home',
 	meta:{
-		keepAlive:false
+		keepAlive:true
 	},
 	children: [{
 		path: 'home',
-		name: '首页',
+		name: 'Home',
 		component: Home
 	}]
 }
@@ -35,34 +35,36 @@ const routes = [
 	component: Layout,
 	redirect: '/',
 	meta:{
-		keepAlive:false
+		keepAlive:true
 	},
 	children: [{
 		path: '/',
-		name: '西瓜视频',
+		name: 'Video',
 		component: Video
 	}]
 },
 {	
 	path: '/findPerson',
 	component: FindPerson,
-	name: '找人',
+	name: 'FindPerson',
 	meta:{
-		keepAlive:false
+		keepAlive:true
 	}
 },
 {	
 	path: '/minVideo',
 	component: MinVideo,
+	name:'MinVideo',
 	meta:{
-		keepAlive:false
+		keepAlive:true
 	}
 },
 {	
 	path: '/account',
 	component: Account,
+	name:'Account',
 	meta:{
-		keepAlive:false
+		keepAlive:true
 	},
 	name: '我的'
 },
@@ -70,32 +72,41 @@ const routes = [
 	path: '/search',
 	component: Search,
 	meta:{
-		keepAlive:false
+		keepAlive:true
 	},
-	name:'搜索'
+	name:'Search'
 },
 {
 	path:'/system',
 	component:System,
-	name:'系统设置',
+	name:'System',
 	meta:{
 		slide:1,
-		keepAlive:false
+		keepAlive:true
 	}
 },
 {
 	path:'/unfinished',
 	component:Unfinished,
-	name:'未完成',
+	name:'Unfinished',
 	meta:{
 		slide:1,
-		keepAlive:false
+		keepAlive:true
 	}
 },
 {
 	path:'/fenlei',
 	component:FenLei,
-	name:'分类查找',
+	name:'FenLei',
+	meta:{
+		slide:1,
+		keepAlive:true
+	}
+},
+{
+	path:'/newsDetail',
+	component:NewsDetail,
+	name:'NewsDetail',
 	meta:{
 		slide:1,
 		keepAlive:false

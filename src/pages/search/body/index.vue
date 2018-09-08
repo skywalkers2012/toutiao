@@ -25,6 +25,8 @@ export default {
 		top: 0.5rem;
 		left: 0;
 		font-size: 0.16rem;
+		overflow: hidden;
+		height: calc(100% - 0.5rem);
 	}
 	.searchResult-wrap {
 		height: calc(100% - 0.5rem);

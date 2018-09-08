@@ -7,7 +7,7 @@
 		</div>
 		<div v-for='tab in tabList' v-if='tab.id===selectItem' :key='tab.name' class="resultContainer" v-show='loadResult' >
 			<mu-load-more  :loading="loadMore" @load="loadMoreData" @refresh="refreshData" :refreshing="refreshing">
-				<newsTitle :data='item' v-for='item in itemList' :key='item.id' class='newsTitle'></newsTitle>
+				<NewsInfo :data='item' v-for='item in itemList' :key='item.id' class='newsTitle'></NewsInfo>
 			</mu-load-more>
 		</div>
 
@@ -17,12 +17,7 @@
 <script>
 
 import {mapGetters} from 'vuex'
-import newsTitle from '@/components/news/newsTitle/index'
-
 export default {
-	components:{
-		newsTitle
-	},
 	data(){
 		return {
 			selectItem:0,

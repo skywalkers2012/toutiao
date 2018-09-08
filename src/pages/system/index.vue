@@ -1,6 +1,6 @@
 <template>
 	<article class="systemWarp">
-		<HeaderBar title="设置"></HeaderBar>
+		<HeaderBar>设置</HeaderBar>
 		<section class='toolList'>
 			<div v-show="isLogin">
 				<div class="line"></div>
@@ -94,7 +94,6 @@
 </template>
 
 <style lang='less' scoped>
-
 .systemWarp{
 	.toolList {
 		background-color: #fff;

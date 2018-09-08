@@ -1,18 +1,20 @@
 <template>
-    <section class="head">
-        <mu-icon value=":icon-back" class="back" @click="goBack($router)" size="30"></mu-icon>
-        <h2>{{title}}</h2>
-        <slot name="right"></slot>  
+    <section class="head df-sb">
+        <div class="left">  
+            <slot name='left'>
+               <mu-icon value=":icon-back"  @click="goBack($router)" size="30"></mu-icon> 
+            </slot>
+        </div>
+        <div class="title">
+            <slot></slot>
+        </div>
+        <div class="right">
+            <slot name="right"></slot> 
+        </div>
     </section>
 </template>
 <script>
 export default {
-    props: {
-        title: {
-            type: String,
-            default: 'skywalker'
-        }
-    }
 }
 </script>
 <style lang="less" scoped>
@@ -21,21 +23,19 @@ export default {
     height: 0.5rem;
     position: relative;
     background-color: #fff;
-    svg {
-        font-size: 0.25rem;
-    }
-    h2 {
-        height: 100%;
-        line-height: 0.5rem;
+    .title {
+        width:100%;
         font-size: 0.18rem;
         text-align: center;
         color: #555;
     }
-    .back {
+    .left {
         position: absolute;
         left: 0.1rem;
-        top: 50%;
-        transform: translateY(-50%);
+    }
+    .right {
+        position: absolute;
+        right:0.1rem;
     }
 }
 </style>

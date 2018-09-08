@@ -27,7 +27,7 @@
 				<div class="guessLike">
 					<titleBar title="猜你喜欢" @clickMore="goFenlei(0,0)"></titleBar>
 					<mu-load-more  :loading="loadMore" @load="loadMoreData" loading-text="正在加载">
-						<personBar v-for="person in guessLikeData" :key="person.id" :personData="person"></personBar>
+						<PersonBar v-for="person in guessLikeData" :key="person.id" :personData="person"></PersonBar>
 					</mu-load-more>
 				</div>	
 			</div>
@@ -37,8 +37,7 @@
 </template>
 
 <script>
-import personGroupBar from '@/components/personGroupBar/index'
-import personBar from '@/components/personBar/index'
+import personGroupBar from './personGroupBar/index'
 import footerBar from '@/pages/layout/footerBar'
 import {Local} from '@/../static/utils/storage'
 import titleBar from '@/components/titleBar/index'
@@ -52,8 +51,7 @@ export default{
 	components:{
 		footerBar,
 		personGroupBar,
-		titleBar,
-		personBar
+		titleBar
 	},
 	computed:{
 		adviceTypeList(){
@@ -180,7 +178,7 @@ export default{
 		display: none;
 	}
 	.body-wrap{
-		height: calc(100% - 1rem);
+		height: calc(100% - 0.9rem);
 		overflow-y: auto;
 		.fenleiSearch-wrap {
 			.bar {

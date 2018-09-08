@@ -1,7 +1,7 @@
 <template>
 	<section class="personBar-wrap">
 		<div class="left-wrap">
-			<mu-avatar size="60">
+			<mu-avatar size="54">
 				<img :src="personData.avatar">
 			</mu-avatar>
 			<div class="info">
@@ -69,7 +69,7 @@ export default {
 				font-size: 18px;
 			}
 			.intro {
-				font-size: 14px;
+				font-size: 16px;
 				color: #C0C0C0;
 				white-space: nowrap;
 				width: 2rem;

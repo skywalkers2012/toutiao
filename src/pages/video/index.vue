@@ -1,5 +1,5 @@
 <template>
-	<article class="xiguavideo-Wrap" v-show="showAll">
+	<article class="xiguavideo-Wrap" ref="all">
 		<mu-tabs :value.sync="selectItem" @change='tabChange' indicator-color='white'>
 			<mu-tab v-for='tab in videoTabList' :key='tab.id'>{{tab.name}}</mu-tab>
 		</mu-tabs>
@@ -9,24 +9,23 @@
 			<mu-load-more  :loading="loadMore" @load="loadMoreData" @refresh="refreshData" :refreshing="refreshing" loading-text="正在推荐新内容">
 				<div v-if='showUpdateNum' class="df-c updateHit">今日头条推荐引擎有{{lastReadNewNum}}条更新</div>
 				<div v-for='(item,index) in itemList' :key='item.id'>
-					<videoItem  :videoData="item" class='videoItem' :ref="item.id"></videoItem>
+					<transition  mode="out-in" enter-active-class='animated slideInUp' leave-active-class='animated slideOutDown'>
+						<videoItem :videoData="item" class='videoItem' :ref="item.id"></videoItem>
+					</transition>
 				</div>		
 			</mu-load-more>
 		</div>
-		<bottomSheet></bottomSheet>
 	</article>
 </template>
 
 <script>
 
 import {mapGetters} from 'vuex'
-import videoItem from '@/components/news/videoNews/index'
-import bottomSheet from '@/components/bottomSheet/index.vue'
+import videoItem from './videoNews/index'
 
 export default {
 	components:{
-		videoItem,
-		bottomSheet
+		videoItem
 	},
 	data(){
 		return {
@@ -38,23 +37,23 @@ export default {
 			lastReadNewNum:0,
 			showUpdateNum:false,
 			watchDataChange:false,
-			showAll:true
 		}
 	},
 	computed:{
 		itemList(){
 			return this.$store.state.video.videoResult;
 		},
+		refresh(){
+			return this.$store.state.video.refresh;
+		},
 		...mapGetters(['videoTabList'])
 	},
 	beforeRouteLeave(to, from, next) {
-		this.showAll=false;
-		setTimeout(function(){
-			next();
-		}, 100)
+		this.$refs.all.style='z-index:-1';
+		next();
 	},
 	watch:{
-		itemList : function(newData,oldData){
+		itemList(newData,oldData){
 			if(!this.watchDataChange) return;
 			this.lastReadNewNum=newData.length-oldData.length;
 			if(this.lastReadNewNum>0){
@@ -65,7 +64,13 @@ export default {
 					this.handleScroll();
 				},800)
 			}
-		}
+		},
+		refresh(newData,oldData){
+			if(newData){
+				this.loadData(this.$store.state.video.selectTabIndex);
+				this.$store.state.video.refresh=false;
+			}
+		},
 	},
 	methods:{
 		tabChange(){
@@ -76,6 +81,7 @@ export default {
 		loadData(typeId){
 			this.loading=true;
 			this.loadResult=false;
+			this.$store.state.user.refreshSearcHit=true;
 			this.$store.dispatch('video/getVideos',{typeId:typeId});
 			setTimeout(() => {
 				this.loading=false;
@@ -101,9 +107,11 @@ export default {
 		handleScroll(){
 			for(var i=0;i<this.itemList.length;i++){
 				var  dom =this.$refs[this.itemList[i].id][0];
-				if((this.$refs['newsTab'+this.selectItem][0].scrollTop-dom.$el.offsetTop)>261||(dom.$el.offsetTop-this.$refs['newsTab'+this.selectItem][0].scrollTop)
-					>this.$refs['newsTab'+this.selectItem][0].clientHeight){
-					dom.$data.pause=true;
+				if(this.$refs['newsTab'+this.selectItem][0]){
+					if((this.$refs['newsTab'+this.selectItem][0].scrollTop-dom.$el.offsetTop)>261||(dom.$el.offsetTop-this.$refs['newsTab'+this.selectItem][0].scrollTop)
+						>this.$refs['newsTab'+this.selectItem][0].clientHeight){
+						dom.$data.pause=true;
+				}
 			}
 		}
 	}

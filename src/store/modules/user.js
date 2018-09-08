@@ -43,7 +43,9 @@ const user ={
 		isNight:false,
 		publishBar:[{title:'发图文',icon:':icon-tuwen'},{title:'拍小视频',icon:':icon-paishipin'},{title:'上传视频',icon:':icon-shipin'},{title:'提问',icon:':icon-tiwen'}],
 		footBarSelectIndex:'/home',
-		myGuanzhu:[]
+		myGuanzhu:[],
+		footBarLastClickIndex:'/home',
+		refreshSearcHit:false
 	},
 	actions:{
 		login({commit},params){

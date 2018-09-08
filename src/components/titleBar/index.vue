@@ -22,12 +22,12 @@ export default {
 	line-height: 0.5rem;
 	.title {
 		padding-left: 0.15rem;
-		font-size: 18px;
+		font-size: 15px;
 		font-weight: bold;
 	}
 	.more {
 		padding-right: 0.15rem;
-		font-size: 16px;
+		font-size: 13px;
 	}
 }
 

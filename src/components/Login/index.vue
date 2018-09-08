@@ -70,11 +70,11 @@
             border: none;
             font-size: 0.16rem;
             line-height: 0.4rem;
+            height: 0.4rem;
             text-indent: 0.3rem;
             outline: none;
         }
         .haoma{
-            height: 60%;
             width: calc(100% - 1rem);
             border-right: 1px solid #ccc;
         }
@@ -103,8 +103,8 @@
         right: 0.1rem;
     }
     .bottom {
-        position: fixed;
-        bottom: 0.1rem;
+        position: absolute;
+        bottom: 0.3rem;
         width: 100%;
         img {
             width: 70%;
@@ -127,7 +127,7 @@ export default {
         }
     },
     watch:{
-        showHeight:function() {
+        showHeight() {
             if(this.docmHeight > this.showHeight){
                 this.hidshow=false
             }else{

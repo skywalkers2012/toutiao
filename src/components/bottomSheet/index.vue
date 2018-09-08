@@ -1,16 +1,16 @@
 <template>
-	<mu-bottom-sheet :open.sync="$store.state.video.showZhuanfa" class="bottomSheet-wrap">
+	<mu-bottom-sheet :open.sync="isShow" class="bottomSheet-wrap">
 		<div class="icons df-sa">
-			<div class="contentWrap df-c" v-for="item in items" @click="zhuanfa(item.id)">
+			<div class="contentWrap df-c" v-for="item in bindData" @click="$emit('clickItem',item)">
 				<div class="tb-c">
-					<mu-avatar color="white" size="70">
+					<mu-avatar color="white" size="60">
 						<img :src="item.img">
 					</mu-avatar>
 					<div class="name">{{item.name}}</div>
 				</div>
 			</div>		
 		</div>
-		<div class="close df-c" @click="$store.state.video.showZhuanfa=false">
+		<div class="close df-c" @click="isShow=false">
 			取消
 		</div>
 	</mu-bottom-sheet>
@@ -20,36 +20,33 @@
 export default {
 	data(){
 		return {
-			items:[
-			{id:0,img:"~@/../static/img/toutiao.png",name:"转发"},
-			{id:1,img:"~@/../static/img/pengyouquan.png",name:"朋友圈"},
-			{id:2,img:"~@/../static/img/weixinhaoyou.png",name:"微信好友"},
-			{id:3,img:"~@/../static/img/qqkongjian.png",name:"qq空间"},
-			{id:4,img:"~@/../static/img/jiarushoucang.png",name:"加入收藏"},
-			{id:5,img:"~@/../static/img/buganxingqu.png",name:"不感兴趣"},
-			{id:6,img:"~@/../static/img/ding.png",name:"顶"},
-			{id:7,img:"~@/../static/img/cai.png",name:"踩"}
-			]
+			isShow:this.open
 		}
 	},
-	methods:{
-		zhuanfa(id){
-			console.log(id);
+	watch:{
+		open(old,val){
+			this.isShow=true;
 		}
 	},
-	mounted(){
-
+	props:{
+		open:{
+			type:Boolean,
+			default:false
+		},
+		bindData:{
+			type:Array
+		}
 	}
 }
 </script>
 
 <style lang='less' scoped>
 .bottomSheet-wrap{
-	height:3.5rem;
+	height:2.5rem;
 	background-color: #F4F4F4;
 	.icons {
 		flex-wrap: wrap;
-		height: 3rem;
+		height: 2.1rem;
 		.contentWrap {
 			width:25%;
 		}
@@ -64,7 +61,7 @@ export default {
 	}
 
 	.close{
-		height: 0.5rem;
+		height: 0.4rem;
 		color: balck;
 		border-top: 1px solid #ccc;
 		font-size: 18px;

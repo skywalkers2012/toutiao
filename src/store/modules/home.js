@@ -10,7 +10,8 @@ const home={
 		adviceTabList:[],
 		homeResult:[],
 		selectTabIndex:1,
-		tabSlide:false
+		tabSlide:false,
+		refresh:false,
 	},
 	actions:{
 		getNews({commit},params){
@@ -41,6 +42,15 @@ const home={
 			return new Promise((resolve,reject)=>{
 				axios.get('getNews',params).then(res=>{
 					commit(types.HOME_LOADMORE,{"result":res.data.list,params});
+					resolve(res.data.list);
+				}).catch(err=>{
+					reject(err);
+				})
+			})
+		},
+		getNewsContent({commit},params){
+			return new Promise((resolve,reject)=>{
+				axios.get('getNewsContent',params).then(res=>{
 					resolve(res.data.list);
 				}).catch(err=>{
 					reject(err);

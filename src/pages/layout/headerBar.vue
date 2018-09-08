@@ -3,11 +3,11 @@
 		<div class="header-left">
 			<input type="text" class="search">
 			<label class="hit">
-				<div :class="{colHit:true,animated: animate,slideInUp:animate}" v-for="arr in hit" @click='searchClick'>
-					<span>{{arr}}</span> <span>|</span>
+				<div :class="{colHit:true,animated: animate,slideInUp:animate}" @click='searchClick'>
+					<span>{{$store.state.search.adviceList|hit}}</span>
 				</div>
 			</label>
-			<mu-icon class='searchIcon' value=":icon-search"></mu-icon>
+			<mu-icon class='searchIcon' value=":icon-search" size="18"></mu-icon>
 		</div>
 		<div class="header-right">
 			<mu-icon value=":icon-camera" color="white" size='24' @click='open=!open'></mu-icon>
@@ -31,8 +31,33 @@ export default {
 		return {
 			keyWord:'',
 			open:false,
-			hit:this.$store.state.search.adviceList,
 			animate:true
+		}
+	},
+	computed:{
+		hitRefresh(){
+			return this.$store.state.user.refreshSearcHit;
+		}
+	},
+	filters:{
+		hit(item){
+			var content='';
+			for(var i=0;i<item.length;i++){
+				if(i!=item.length-1){
+					content+=item[i]+"|";
+				}else{
+					content+=item[i];
+				}	
+			}
+			return content;
+		}
+	},
+	watch:{
+		hitRefresh(newData){
+			if(newData){
+				this.refreshHit();
+				this.$store.state.user.refreshSearcHit=false;
+			}
 		}
 	},
 	methods:{
@@ -42,16 +67,14 @@ export default {
 		publish(){
 			this.$router.push('/unfinished');
 			this.open=false;
-		}
-	},
-	mounted(){
-		setTimeout(()=>{
+		},
+		refreshHit(){
 			this.animate=false;
 			this.$store.dispatch('search/adviceSearch').then(res=>{		
 				this.hit=this.$store.state.search.adviceList;
 				this.animate=true;
 			});
-		}, this.$store.state.search.adviceSearchInterval)
+		}
 	}
 }
 
@@ -63,12 +86,14 @@ export default {
 	height: 0.5rem;
 	background: #D33D3E;
 	position: relative;
-	line-height: 1.2;
 	.header-left {
-		height: 0.3rem;
-		line-height: 0.3rem;
+		position: relative;
+		left: 0;
+		width: calc(100% - 0.75rem);
+		height: 0.38rem;
+		line-height: 0.38rem;
 		.search {
-			width: calc(100% - 0.75rem);
+			width: 100%;
 			border: none;
 			outline: none;
 			border-radius: 0.04rem;
@@ -78,11 +103,14 @@ export default {
 		}
 		.hit {
 			position: absolute;
-			left: 0.5rem;
-			width: calc(100% - 1.2rem);
+			left: 0.4rem;
+			height: 0.38rem;
+			line-height: 0.38rem;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			font-size: 0.15rem;
+			width: calc(100% - 0.4rem);
 			.colHit {
 				display: inline-block;
 				white-space: nowrap;
@@ -93,8 +121,6 @@ export default {
 		.searchIcon {
 			position: absolute;
 			left: 0.2rem;
-			/* top: 0.14rem; */
-			font-size: 0.22rem;	
 		}
 	}
 	.header-right{

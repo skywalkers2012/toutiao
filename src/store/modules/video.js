@@ -8,7 +8,8 @@ const video = {
 		videoResult:[],
 		selectTabIndex:1,
 		playToken:"no token",
-		showZhuanfa:false
+		showZhuanfa:false,
+		refresh:false,
 	},
 	actions:{
 		getVideos({commit},params){
