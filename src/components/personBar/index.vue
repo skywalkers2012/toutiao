@@ -1,16 +1,16 @@
 <template>
-	<section class="personBar-wrap">
-		<div class="left-wrap">
-			<mu-avatar size="54">
+	<section class="personBar-wrap df-sa">
+		<div class="left-wrap df-sa" ref='left'>
+			<mu-avatar :size="avatarSize">
 				<img :src="personData.avatar">
 			</mu-avatar>
 			<div class="info">
-				<div class="name">{{personData.name}}</div>
-				<div class="intro">{{personData.intro}}</div>
-				<div class="fengsi">{{personData.fengsi}}万粉丝</div>
+				<div class="name" ref="name">{{personData.name}}</div>
+				<div class="intro" v-show="showIntro" ref="intro">{{personData.intro}}</div>
+				<div class="fengsi" v-show="showFengsi" ref="fengsi">{{personData.fengsi}}万粉丝</div>
 			</div>
 		</div>
-		<div class="right-wrap" @click="guanzhu">
+		<div class="right-wrap" @click="guanzhu" ref="right">
 			<div :class="{'button-wrap':true,'df-c':true,yiguanzhu:isGuanzhu}">{{btnText}}
 				<mu-circular-progress class="demo-circular-progress" :size="22" :stroke-width="2" v-show="showCircular" color="white"></mu-circular-progress>
 			</div>		
@@ -24,12 +24,19 @@ export default {
 		return {
 			btnText:"关注",
 			showCircular:false,
-			isGuanzhu:false
+			isGuanzhu:false,
+			avatarSize:50,
+			showFengsi:true,
+			showIntro:true
 		}
 	},
 	props:{
 		personData:{
 			type:Object
+		},
+		position:{
+			type:String,
+			default:'findPerson'
 		}
 	},
 	methods:{
@@ -49,6 +56,21 @@ export default {
 				}, 500);
 			}
 		}
+	},
+	mounted(){
+		if(this.position==='news'){
+			this.avatarSize=32;
+			this.$refs.name.style="font-size:14px";
+			this.$refs.intro.style="font-size:12px";
+			this.showFengsi=false;
+		}
+		if(this.position==='head'){
+			this.avatarSize=30;
+			this.$refs.name.style="font-size:14px";
+			this.$refs.fengsi.style="font-size:10px";
+			this.$refs.right.style="right:0";
+			this.showIntro=false;
+		}
 	}
 }
 </script>
@@ -56,15 +78,13 @@ export default {
 <style lang='less' scoped>
 .personBar-wrap {
 	position: relative;
-	height: .8rem;
+	height: 0.8rem;
 	.left-wrap {
 		position: absolute;
-		left: .15rem;
-		top: .1rem;
-		width: 2.8rem;
+		left: 15px;
 		.info {
 			display: inline-block;
-			padding-left: .1rem;
+			padding-left: 0.1rem;
 			.name {
 				font-size: 18px;
 			}
@@ -84,8 +104,7 @@ export default {
 	}
 	.right-wrap{
 		position: absolute;
-		right: .15rem;
-		top: .25rem;
+		right: 15px;
 		.button-wrap{
 			background-color: red;
 			border-radius: 5px;

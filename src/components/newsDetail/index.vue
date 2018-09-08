@@ -2,13 +2,16 @@
 	<section class="newsContent-wrap">
 		<HeaderBar>
 			<div slot="right">
-				<mu-icon value=':icon-search' size='24'></mu-icon>
+				<mu-icon value=':icon-search' size='24' v-show='!changeHeader'></mu-icon>
 				<mu-icon value=':icon-more' size='24'></mu-icon>
 			</div>
+			<div v-show='changeHeader' slot='center'>
+				<PersonBar :personData="bindData" position='head'></PersonBar>
+			</div>
 		</HeaderBar>
-		<div class="body-wrap">
+		<div class="body-wrap" @scroll="handleScroll" ref="bodyWrap">
 			<div class="title">{{$route.params.title}}</div>
-			<PersonBar :personData="bindData" class="personBar"></PersonBar>
+			<PersonBar :personData="bindData" class="personBar" position='news'  ref='person'></PersonBar>
 			<div class="content">
 				<div class="paragraph" v-for='(item,index) in bindData.newsContent'>{{item}}</div>
 			</div>
@@ -21,7 +24,18 @@
 export default {
 	data(){
 		return {
-			bindData:{}
+			bindData:{},
+			changeHeader:false
+		}
+	},
+	methods:{
+		handleScroll(){
+			if(this.$refs.bodyWrap.scrollTop>this.$refs.person.$el.offsetTop){
+				this.changeHeader=true;
+			}else{
+				this.changeHeader=false;
+			}
+
 		}
 	},
 	mounted(){
@@ -35,23 +49,22 @@ export default {
 <style lang='less' scoped>
 .newsContent-wrap{
 	position: relative;
+	.personBar{
+		height: 0.5rem;
+	}
 	.body-wrap{
 		height: calc(100% - 1rem);
 		overflow: auto;
-		.personBar{
-			height: 0.6rem;
-		}
 		.title {
-			font-size: 20px;
+			font-size: 24px;
 			line-height: 30px;
 			padding: 0.1rem;
 		}
 		.content {
-			padding: 0.1rem;
-			font-size: 16px;
+			font-size: 18px;
 			.paragraph{
 				text-indent: 0.2rem;
-				padding: 0.05rem 0;
+				padding: 0.1rem 0;
 			}
 		}
 	}

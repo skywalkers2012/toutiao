@@ -1,1 +1,19 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=0"><link rel=stylesheet href=https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css><title>今日头条</title><link rel="shortcut icon" href=./favicon.ico><link href=./static/css/app.dba64e185c953b4146d15d88157c2f8c.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.40e28c532720cd2bc4c0.js></script><script type=text/javascript src=./static/js/app.3f64dec1210ed2945545.js></script></body></html>
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=0"><link rel=stylesheet href=https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css><title>今日头条</title><link rel="shortcut icon" href=./favicon.ico><link href=./static/css/app.63dd77921b71f94c7cd006e6f1dbc64e.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.aa32307c82723a57eb9b.js></script><script type=text/javascript src=./static/js/app.9cd8293f5b386999fe16.js></script></body><script>mui.init({
+		keyEventBind: {
+			backbutton: true
+		}
+	});
+	var first = null;
+	mui.back = function() {
+		if (!first) {
+			first = new Date().getTime();
+			mui.toast('再按一次退出应用');
+			history.go(-1)
+			setTimeout(function() {
+				first = null;
+			}, 1000);
+		} else {
+			if (new Date().getTime() - first < 1000) {
+				plus.runtime.quit();
+
+			} } };</script></html>

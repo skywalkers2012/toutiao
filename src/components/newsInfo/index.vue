@@ -28,7 +28,7 @@ export default {
 .newsTitle{
 	h3 {
 		color: #222;
-		font-size: 18px;
+		font-size: 16px;
 		line-height: 24px;
 		font-weight: normal;
 		overflow: hidden;
@@ -45,7 +45,7 @@ export default {
 	.item_info{
 		display: flex;
 		justify-content: flex-start;
-		font-size: 0.14rem;
+		font-size: 0.12rem;
 		padding-top: 0.05rem;
 		line-height: 20px;
 		height: 20px;
