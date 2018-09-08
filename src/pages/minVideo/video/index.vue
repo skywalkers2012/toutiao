@@ -68,7 +68,6 @@ export default {
 			}
 		},
 		clickProcess(event){
-			console.log(event)
 			if(event.target.id==="markCss"){
 				if(!this.player.isFullscreen()){  
 					this.player.play(); 

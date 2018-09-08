@@ -60,5 +60,8 @@ export default {
 		bottom: 0;
 		left: 0;
 	}
+	.body-wrap::-webkit-scrollbar {
+		display: none;
+	}
 }
 </style>
