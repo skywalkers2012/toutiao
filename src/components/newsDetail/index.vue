@@ -55,15 +55,15 @@ export default {
 	.body-wrap{
 		height: calc(100% - 1rem);
 		overflow: auto;
+		padding: 0 0.2rem;
 		.title {
 			font-size: 24px;
 			line-height: 30px;
-			padding: 0.1rem;
+			padding: 0.15rem;
 		}
 		.content {
-			font-size: 18px;
+			font-size: 16px;
 			.paragraph{
-				text-indent: 0.2rem;
 				padding: 0.1rem 0;
 			}
 		}

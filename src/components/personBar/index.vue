@@ -59,14 +59,14 @@ export default {
 	},
 	mounted(){
 		if(this.position==='news'){
-			this.avatarSize=32;
-			this.$refs.name.style="font-size:14px";
+			this.avatarSize=36;
+			this.$refs.name.style="font-size:15px;font-weight: bold;";
 			this.$refs.intro.style="font-size:12px";
 			this.showFengsi=false;
 		}
 		if(this.position==='head'){
-			this.avatarSize=30;
-			this.$refs.name.style="font-size:14px";
+			this.avatarSize=36;
+			this.$refs.name.style="font-size:15px;font-weight: bold;";
 			this.$refs.fengsi.style="font-size:10px";
 			this.$refs.right.style="right:0";
 			this.showIntro=false;

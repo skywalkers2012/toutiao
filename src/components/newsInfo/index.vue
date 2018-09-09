@@ -28,7 +28,7 @@ export default {
 .newsTitle{
 	h3 {
 		color: #222;
-		font-size: 16px;
+		font-size: 17px;
 		line-height: 24px;
 		font-weight: normal;
 		overflow: hidden;
