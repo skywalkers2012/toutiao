@@ -27,10 +27,6 @@ Vue.prototype.goBack = (route) => {
 
 Vue.use(MuseUI);
 
-import Mui from 'vue-awesome-mui';
-
-Vue.use(Mui);
-
 import VueVideoPlayer  from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 

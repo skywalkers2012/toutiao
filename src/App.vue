@@ -26,8 +26,7 @@ watch: {
   var animate = this.$router.animate || to.meta.slide
   if (!animate) {
    this.animate = '' 
- }
- else {
+ }else {
    this.animate = animate === 1 ?  'slide-left' :
    animate === 2 ?  'slide-right' :''
  }

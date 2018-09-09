@@ -1,20 +1,20 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=0"><link rel=stylesheet href=https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css><title>今日头条</title><script>mui.init({
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=0"><link rel=stylesheet href=https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css><script type=text/javascript src=./static/utils/mui.min.js></script><title>今日头条</title><script>mui.init({
 		keyEventBind: {
-			backbutton: true
-		}
-	});
-	var first = null;
-	mui.back = function() {
-		if (!first) {
-			first = new Date().getTime();
-			history.go(-1) setTimeout(function() {
-				first = null;
-			},
-			1000);
-		} else {
-			if (new Date().getTime() - first < 1000) {
-				plus.runtime.quit();
+        backbutton: true  
+    }
+});
 
-			}
-		}
-	};</script><link rel="shortcut icon" href=./favicon.ico><link href=./static/css/app.25f686024a1593e55e42d89edc5caa0b.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.aa32307c82723a57eb9b.js></script><script type=text/javascript src=./static/js/app.0146cb4271c30f82afff.js></script></body></html>
+var first = null;
+mui.back = function() {
+ 
+    if (!first) {
+        first = new Date().getTime();
+        history.go(-1)
+        setTimeout(function() {
+        	first = null;
+        }, 1000);
+    } else {
+        if (new Date().getTime() - first < 1000) {
+            plus.runtime.quit();
+            1
+        } } };</script><link rel="shortcut icon" href=./favicon.ico><link href=./static/css/app.d0340f7114ec5735b6eaa5ede2f485b6.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.40e28c532720cd2bc4c0.js></script><script type=text/javascript src=./static/js/app.02c89fb973bc188a4a46.js></script></body></html>

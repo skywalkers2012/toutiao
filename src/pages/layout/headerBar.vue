@@ -1,5 +1,5 @@
 <template>
-	<section class="header-wrap df-sb">
+	<section class="header-wrap df-sb" id="header">
 		<div class="header-left">
 			<input type="text" class="search">
 			<label class="hit">
