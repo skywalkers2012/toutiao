@@ -9,7 +9,7 @@
 			<mu-load-more  :loading="loadMore" @load="loadMoreData" @refresh="refreshData" :refreshing="refreshing" loading-text="正在推荐新内容">
 				<div v-if='showUpdateNum' class="df-c updateHit">今日头条推荐引擎有{{lastReadNewNum}}条更新</div>
 				<div v-for='(item,index) in itemList' :key='item.id'>
-					<transition  mode="out-in" enter-active-class='animated slideInUp' leave-active-class='animated slideOutDown'>
+					<transition mode="out-in">
 						<videoItem :videoData="item" class='videoItem' :ref="item.id"></videoItem>
 					</transition>
 				</div>		

@@ -5,7 +5,7 @@
 			<mu-icon value=':icon-search' class='icon-search' ></mu-icon>
 			<input type="text" placeholder="搜你想搜的" ref='search' @keyup='searchHit'  @keydown.enter.stop='search(keyword)' v-model='keyword'>
 			<span class='searchText' @click.stop='search(keyword)'>搜索</span>	
-			<mu-icon value=':icon-close' class='icon-close' @click="close" v-show='keyword.length>0'></mu-icon>
+			<mu-icon value=':icon-close' class='icon-close' @click="close" v-show='keyword.length>0' size="15"></mu-icon>
 		</div>
 		<div class="hit li-overflow" v-show='showHit'>
 			<div v-for='(item,index) in searchHitList' class='hitRow df-fs' @click.stop='search(item)'>
@@ -97,6 +97,7 @@ export default {
 			position: absolute;
 			left: 0.4rem;
 			text-indent: 0.2rem;
+			font-size: 0.15rem;
 		}
 		.icon-search{
 			position: absolute;
@@ -112,7 +113,7 @@ export default {
 		}
 		.icon-close{
 			position: absolute;
-			left: calc(100% - 0.75rem);
+			left: calc(100% - 0.8rem);
 			font-size: 0.1rem;
 		}
 	}

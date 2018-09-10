@@ -1,46 +1,49 @@
 <template>
 	<section class="videoNews-wrap">
-		<div class="detail" @click.prevent="videoPlay">
+		<div class="detail" @click.prevent="videoPlay($event)">
 			<video-player  class="vjs-custom-skin" 
 			ref="videoPlayer"
 			:options="playerOptions"
 			:playsinline="true"
 			>
 		</video-player>
-		<div class="detailInfo">
+		<div class="detailInfo" id="playContent">
 			<div class="title">{{videoData.title}}</div>
 			<div class="playCount">{{videoData.playCount}}次播放</div>
 			<div class="videoTime">{{videoData.time}}</div>
-			<mu-avatar size="40" class='avatar' @click="$router.push('/unfinished')" v-show="showAvatar">
-				<img :src="videoData.avatar">
-			</mu-avatar>
-		</div>
-	</div>
-	<div class="df-sa info">
-		<div class="avatar" @click="$router.push('/unfinished')" v-show="showAvatar">
-			<div class="authorName">
-				{{videoData.authorName}}
+			<div class="df-sa info">
+				<div class="leftinfo">
+					<div class="authorName" @click.stop="$router.push('/unfinished')" v-show="showAvatar">
+						{{videoData.authorName}}
+					</div>
+					<mu-avatar size="40" class='avatar' @click.stop="$router.push('/unfinished')" v-show="showAvatar">
+						<img :src="videoData.avatar">
+					</mu-avatar>
+
+					<div v-show="!showAvatar" class="df-sa">
+						<span>分享到</span>
+						<mu-avatar size="20" class="playAvatar">
+							<img src="~@/../static/img/weixin.png">
+						</mu-avatar>
+						<mu-avatar size="20" class="playAvatar">
+							<img src="~@/../static/img/weibo.png">
+						</mu-avatar>
+					</div>
+				</div>
+				<div class="rightInfo df-sa">
+					<div class="guanzhu" @click='isGuanzhu=!isGuanzhu'>
+						<mu-icon value=":icon-guanzhu" class="barIcon" v-show="!isGuanzhu"></mu-icon>
+						<span>{{isGuanzhu?"已关注":"关注"}}</span>
+					</div>
+					<div class="pinglun">
+						<mu-icon value=":icon-pinglun" class="barIcon"></mu-icon>
+						<span>{{videoData.pinglun}}</span>
+					</div>
+					<div class="zhuanfa" @click="showSheet=!showSheet">
+						<mu-icon value=":icon-more" class="barIcon"></mu-icon>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div v-show="!showAvatar" class="df-sa">
-			<span>分享到</span>
-			<mu-avatar size="20" class="playAvatar">
-				<img src="~@/../static/img/weixin.png">
-			</mu-avatar>
-			<mu-avatar size="20" class="playAvatar">
-				<img src="~@/../static/img/weibo.png">
-			</mu-avatar>
-		</div>
-		<div class="guanzhu" @click='isGuanzhu=!isGuanzhu'>
-			<mu-icon value=":icon-guanzhu" class="barIcon" v-show="!isGuanzhu"></mu-icon>
-			<span>{{isGuanzhu?"已关注":"关注"}}</span>
-		</div>
-		<div class="pinglun">
-			<mu-icon value=":icon-pinglun" class="barIcon"></mu-icon>
-			<span>{{videoData.pinglun}}</span>
-		</div>
-		<div class="zhuanfa" @click="showSheet=!showSheet">
-			<mu-icon value=":icon-more" class="barIcon"></mu-icon>
 		</div>
 	</div>
 	<bottomSheet :open="showSheet" :bindData='items'></bottomSheet>
@@ -108,16 +111,18 @@ export default {
 		}
 	},
 	methods: {
-		videoPlay(){
-			this.$store.state.video.playToken=this.videoData.id;	
-			if(this.play){
-				this.player.pause();
-				this.play=false;
-			}else{
-				this.showAvatar=false;
-				this.player.play();
-				this.pause=false;
-				this.play=true;
+		videoPlay(event){
+			if(event.target.id==='playContent'){
+				this.$store.state.video.playToken=this.videoData.id;	
+				if(this.play){
+					this.player.pause();
+					this.play=false;
+				}else{
+					this.showAvatar=false;
+					this.player.play();
+					this.pause=false;
+					this.play=true;
+				}
 			}
 		}
 	},
@@ -134,6 +139,9 @@ export default {
 				this.play=false;
 			}
 		}
+	},
+	beforeDestroy(){
+		this.$refs.videoPlayer.dispose();
 	}
 }
 </script>
@@ -144,6 +152,7 @@ export default {
 	.detail{
 		position: relative;
 		color: white;
+		height: 2.5rem;
 		.detailInfo {
 			position: absolute;
 			top: 0;
@@ -174,19 +183,37 @@ export default {
 			}
 			.avatar{
 				position: absolute;
-				bottom: -10px;
-				left: 24px;
+				bottom: 30px;
+				left: 20px;
 			}
 		}
-
-	}
-	.info {
-		height: 0.4rem;
-		line-height: 0.4rem;
-		font-size: 14px;
-		.playAvatar {
-			background-color: transparent;
-			margin: 0 0.05rem;
+		.info {
+			height: 0.4rem;
+			line-height: 0.4rem;
+			font-size: 14px;
+			position: absolute;
+			bottom: 0;
+			background-color: white;
+			width: 100%;
+			color: black;
+			.leftinfo {
+				width: 40%;
+				.playAvatar {
+					background-color: transparent;
+					margin: 0 0.05rem;
+				}
+				.authorName{
+					position: absolute;
+					bottom: 0;
+					left: 24px;
+				}
+			}
+			.rightInfo {
+				width: 60%;
+				.guanzhu {
+					padding-left: 0.1rem;
+				}
+			}
 		}
 	}
 	.barIcon {
@@ -202,5 +229,8 @@ export default {
 	top: 1.1rem;
 	left: 1.6rem;
 	margin-left: 0;
+}
+.video-js .vjs-control-bar {
+	background-color: transparent;
 }
 </style>

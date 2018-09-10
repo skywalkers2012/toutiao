@@ -94,6 +94,9 @@ export default {
 		this.$refs.minVideo.$el.querySelector('video').setAttribute('x5-video-player-fullscreen', true);
 		this.$refs.minVideo.$el.querySelector('video').style="object-fit: fill";
 		
+	},
+	beforeDestroy(){
+		this.$refs.minVideo.dispose();
 	}
 }
 </script>

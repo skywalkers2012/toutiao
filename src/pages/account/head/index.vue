@@ -2,14 +2,14 @@
 	<section class="wrap">
 		<div class="head " v-if='isLogin'>
 			<div class="top df-sb">
-				<div class="left">
-						<mu-avatar size='64'>
-							<img src="~@/../static/img/avatar.png">
-						</mu-avatar>
-				</div>
-				<div class="name">
-					<div>{{name}}</div>
-					<mu-button round small color="#FC8E04">申请认证</mu-button>	
+				<div class="left df-sa">
+					<mu-avatar size='64'>
+						<img src="~@/../static/img/avatar.png">
+					</mu-avatar>
+					<div class="name">
+						<div>{{name}}</div>
+						<mu-button round small color="#FC8E04">申请认证</mu-button>	
+					</div>
 				</div>
 				<div class="df-sa" style='font-size:0.12rem;padding-right:0.2rem'>
 					<div>
@@ -91,8 +91,7 @@ export default{
 			}
 			.name{
 				font-size: 0.18rem;
-				padding-left: 1.2rem;
-				position: absolute;
+				padding-left: 0.1rem;
 			}
 		}
 		.middle {

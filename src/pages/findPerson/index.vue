@@ -58,7 +58,7 @@ export default{
 			if(Local.get('findPerson_typeList')){
 				this.$store.state.findPerson.typeList=Local.get('findPerson_typeList');
 			}
-			return this.$store.state.findPerson.typeList.slice(0, 5);
+			return this.$store.state.findPerson.typeList.slice(0, 3);
 		},
 		personBarInfo(){
 			if(Local.get('findPerson_personBarInfo')){
@@ -116,7 +116,7 @@ export default{
 	beforeCreate(){
 		if(!Local.get('findPerson_typeList')){
 			this.$store.dispatch('findPerson/getTypeList').then(res=>{
-				res.slice(0, 5).forEach(item=>{
+				res.slice(0, 3).forEach(item=>{
 					var secondTypeId=0;
 					if(item.children){
 						item.children.forEach(child=>{
