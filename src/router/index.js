@@ -1,17 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/pages/layout/index.vue'
-import Home from '@/pages/home/index'
-import Video from '@/pages/video/index'
-import FindPerson from '@/pages/findPerson/index'
-import FenLei from '@/pages/findPerson/fenlei/index'
-import MinVideo from '@/pages/minVideo/index'
-import Account from '@/pages/account/index'
-import Search from '@/pages/search/index'
-import System from '@/pages/system/index'
-import Unfinished from '@/pages/unfinished/index'
-import NewsDetail from '@/pages/home/newsDetail/index'
-
 
 Vue.use(Router)
 Router.prototype.animate = 0
@@ -19,97 +7,78 @@ Router.prototype.animate = 0
 const routes = [
 {	
 	path: '/',
-	component: Layout,
 	redirect: '/home',
-	meta:{
-		keepAlive:true
-	},
+},
+{	
+	path: '/',
+	component: resolve => require(['@/pages/layout/index.vue'], resolve),
+	redirect: '/home',
 	children: [{
 		path: 'home',
 		name: 'Home',
-		component: Home
+		component: resolve => require(['@/pages/home/index.vue'],resolve)
 	}]
-}
-,{	
+},
+{	
 	path: '/video',
-	component: Layout,
+	component: resolve => require(['@/pages/layout/index.vue'],resolve),
 	redirect: '/',
-	meta:{
-		keepAlive:true
-	},
 	children: [{
 		path: '/',
 		name: 'Video',
-		component: Video
+		component: resolve => require(['@/pages/video/index.vue'],resolve)
 	}]
 },
 {	
 	path: '/findPerson',
-	component: FindPerson,
+	component: resolve => require(['@/pages/findPerson/index.vue'],resolve),
 	name: 'FindPerson',
-	meta:{
-		keepAlive:true
-	}
 },
 {	
 	path: '/minVideo',
-	component: MinVideo,
+	component: resolve => require(['@/pages/minVideo/index.vue'], resolve),
 	name:'MinVideo',
-	meta:{
-		keepAlive:true
-	}
 },
 {	
 	path: '/account',
-	component: Account,
-	name:'Account',
-	meta:{
-		keepAlive:true
-	},
-	name: '我的'
+	component: resolve => require(['@/pages/account/index.vue'], resolve),
+	name:'Account'
 },
 {	
 	path: '/search',
-	component: Search,
-	meta:{
-		keepAlive:true
-	},
+	component: resolve => require(['@/pages/search/index.vue'], resolve),
 	name:'Search'
 },
 {
 	path:'/system',
-	component:System,
+	component:resolve => require(['@/pages/system/index.vue'], resolve),
 	name:'System',
 	meta:{
-		slide:1,
-		keepAlive:true
+		slide:1
 	}
 },
 {
 	path:'/unfinished',
-	component:Unfinished,
+	component:resolve => require(['@/pages/unfinished/index.vue'], resolve),
 	name:'Unfinished',
 	meta:{
-		slide:1,
-		keepAlive:true
+		slide:1
 	}
 },
 {
 	path:'/fenlei',
-	component:FenLei,
+	component:resolve => require(['@/pages/findPerson/fenlei/index.vue'], resolve),
 	name:'FenLei',
 	meta:{
-		slide:1,
-		keepAlive:true
+		slide:1
 	}
 },
 {
 	path:'/newsDetail',
-	component:NewsDetail,
+	component:resolve => require(['@/pages/home/newsDetail/index.vue'], resolve),
 	name:'NewsDetail',
 	meta:{
-		slide:1,
-		keepAlive:false
+		slide:1
 	}
 }
 ]
